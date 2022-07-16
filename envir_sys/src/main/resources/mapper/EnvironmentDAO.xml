@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.haoea.dao.EnvironmentDAO">
+
+    <select id="getByDate" resultType="com.haoea.domain.Environment">
+        select * from environment where clock like #{datetime};
+    </select>
+
+    <select id="getLatest" resultType="com.haoea.domain.Environment">
+        SELECT *, ABS(NOW() - clock)  AS diffTime
+        FROM environment
+        ORDER BY diffTime ASC
+        LIMIT 0, 1;
+    </select>
+</mapper>
+
+
